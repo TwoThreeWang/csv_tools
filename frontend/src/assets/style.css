@@ -1,0 +1,15 @@
+button{
+    margin: 5px;
+}
+.result{
+    font-size: large;
+    font-weight: 500;
+    margin-top: 10px;
+}
+.input{
+    width: 90%;
+    margin: 10px auto;
+}
+body{
+    margin: 10px;
+}

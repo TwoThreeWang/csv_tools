@@ -1,0 +1,13 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "csv_encode_conver",
+  "outputfilename": "csv_encode_conver",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "TwoThreeWang",
+    "email": "hi_wangcheng@163.com"
+  }
+}
