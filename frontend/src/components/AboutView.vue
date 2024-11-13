@@ -9,7 +9,7 @@
         <br>
         Version: 1.0
         <br>
-        Github: <a href=""></a>
+        Github: <a href="https://github.com/TwoThreeWang/csv_encode_conver">https://github.com/TwoThreeWang/csv_encode_conver</a>
     </div>
   </div>
 </template>
