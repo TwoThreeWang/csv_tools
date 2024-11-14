@@ -4,4 +4,6 @@ import {main} from '../models';
 
 export function Conver(arg1:string):Promise<main.Response>;
 
+export function EscapeConver(arg1:string):Promise<main.Response>;
+
 export function SelectFile():Promise<main.Response>;

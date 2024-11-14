@@ -6,6 +6,10 @@ export function Conver(arg1) {
   return window['go']['main']['App']['Conver'](arg1);
 }
 
+export function EscapeConver(arg1) {
+  return window['go']['main']['App']['EscapeConver'](arg1);
+}
+
 export function SelectFile() {
   return window['go']['main']['App']['SelectFile']();
 }

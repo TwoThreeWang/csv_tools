@@ -26,9 +26,9 @@ type Response struct {
 	Info string `json:"info"`
 }
 
-// Conver returns a greeting for the given name
+// Conver 编码转换
 func (a *App) Conver(filePath string) Response {
-	err := Conversion(a.ctx, filePath)
+	err := Conversion(filePath)
 	response := Response{
 		Data: "",
 		Info: "",
@@ -40,6 +40,22 @@ func (a *App) Conver(filePath string) Response {
 	response.Info = "转换成功，结果文件跟原文件在同一个目录下！"
 	return response
 }
+
+// EscapeConver 科学计数法+编码转换
+func (a *App) EscapeConver(filePath string) Response {
+	err := EscapeConversion(filePath)
+	response := Response{
+		Data: "",
+		Info: "",
+	}
+	if err != nil {
+		response.Info = err.Error()
+		return response
+	}
+	response.Info = "转换成功，结果文件跟原文件在同一个目录下！"
+	return response
+}
+
 func (a *App) SelectFile() Response {
 	dialogOption := runtime.OpenDialogOptions{
 		Title: "选择要转换的CSV文件",
