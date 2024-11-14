@@ -4,11 +4,9 @@ import (
 	"bufio"
 	"encoding/csv"
 	"errors"
-	"fmt"
 	"golang.org/x/text/encoding/simplifiedchinese"
 	"golang.org/x/text/transform"
 	"io"
-	"log"
 	"os"
 	"regexp"
 	"strings"
@@ -17,13 +15,12 @@ import (
 // Conversion 编码转换函数
 func Conversion(file_path string) error {
 	if !strings.Contains(file_path, ".csv") {
-		return errors.New("error opening CSV file: only CSV file can be converted")
+		return errors.New("Error: 仅支持 CSV 文件")
 	}
 	// 读取UTF-8编码的CSV文件
 	csvFile, err := os.Open(file_path)
 	if err != nil {
-		log.Fatalf("Error opening CSV file: %v", err)
-		return err
+		return errors.New("Error: 文件打开失败")
 	}
 	defer csvFile.Close()
 
@@ -32,8 +29,7 @@ func Conversion(file_path string) error {
 	// 创建GBK编码的输出文件
 	gbkFile, err := os.Create(newPath)
 	if err != nil {
-		log.Fatalf("Error creating GBK output file: %v", err)
-		return err
+		return errors.New("创建新文件失败: " + err.Error())
 	}
 	defer gbkFile.Close()
 
@@ -47,14 +43,12 @@ func Conversion(file_path string) error {
 			break
 		}
 		if err != nil {
-			log.Fatalf("Error reading CSV record: %v", err)
-			return err
+			return errors.New("文件格式错误: " + err.Error())
 		}
 
 		err = writer.Write(record)
 		if err != nil {
-			log.Fatalf("Error writing CSV record: %v", err)
-			return err
+			return errors.New("文件写入失败: " + err.Error())
 		}
 	}
 	return nil
@@ -63,13 +57,12 @@ func Conversion(file_path string) error {
 // EscapeConversion 科学计数法和编码转换
 func EscapeConversion(file_path string) error {
 	if !strings.Contains(file_path, ".csv") {
-		return errors.New("error opening CSV file: only CSV file can be converted")
+		return errors.New("Error: 仅支持 CSV 文件转换")
 	}
 	// 打开 CSV 文件
 	file, err := os.Open(file_path)
 	if err != nil {
-		log.Fatalf("Error opening CSV file: %v", err)
-		return err
+		return errors.New("Error: 文件打开失败")
 	}
 	defer file.Close()
 
@@ -77,8 +70,7 @@ func EscapeConversion(file_path string) error {
 	newPath := strings.Replace(file_path, ".csv", "_result.csv", -1)
 	outputFile, err := os.Create(newPath)
 	if err != nil {
-		log.Fatalf("Error creating GBK output file: %v", err)
-		return err
+		return errors.New("创建新文件失败: " + err.Error())
 	}
 	defer outputFile.Close()
 	writer := bufio.NewWriter(transform.NewWriter(outputFile, simplifiedchinese.GB18030.NewEncoder()))
@@ -116,14 +108,12 @@ func EscapeConversion(file_path string) error {
 		// 将处理后的行写入输出文件，指定编码为 GBK
 		_, err = writer.WriteString(newLine + "\n")
 		if err != nil {
-			log.Fatalf("Error writing CSV record: %v", err)
-			return err
+			return errors.New("文件写入失败: " + err.Error())
 		}
 	}
 
 	if err := scanner.Err(); err != nil {
-		fmt.Println("Error opening CSV file:", err)
-		return err
+		return errors.New("文件打开失败: " + err.Error())
 	}
 	return nil
 }

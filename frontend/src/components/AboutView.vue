@@ -2,16 +2,24 @@
 <template>
   <div class="card">
     <router-link to="/">《 返回首页</router-link>
-    <h3>CSV encode conver，一个 CSV 文件编码转 GBK 小工具</h3>
+    <h3>CSV Conver Tool，一个 CSV 文件转换小工具</h3>
     <p>本工具用于将 CSV 文件转为 GBK 编码，以解决直接使用 Excel 打开 CSV 文件乱码的问题。</p>
     <div class="alert" role="alert">
         Development Team: WangCheng
         <br>
-        Version: 1.0
+        Version: 2.0
         <br>
         Github: <a href="https://github.com/TwoThreeWang/csv_encode_conver">https://github.com/TwoThreeWang/csv_encode_conver</a>
     </div>
   </div>
+  <br>
+  <div class="card">
+      <h3>版本更新记录</h3>
+      <div class="alert" role="alert">
+          <li>20241114 v2.0 增加科学计数法处理功能；解决文件格式错误闪退问题。</li>
+          <li>20241113 v1.0 软件诞生</li>
+      </div>
+    </div>
 </template>
 
 <script>

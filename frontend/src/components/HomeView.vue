@@ -2,11 +2,11 @@
   <main>
     <div id="result" class="result">{{ data.resultText }}</div>
     <div id="input" class="input-box">
-      <input id="name" v-model="data.file_path" autocomplete="off" class="input" type="text"/>
+      <input id="name" v-model="data.file_path" autocomplete="off" class="input" type="text" placeholder="选择文件或填入文件路径"/>
       <br>
-      <button class="btn" @click="select_file">选择文件</button>
-      <button class="btn" @click="conver">乱码转换</button>
-      <button class="btn" @click="escape_conver">科学计数法转换</button>
+      <button class="button-outline" @click="select_file">选择文件</button>
+      <button class="button-outline" @click="conver">乱码转换</button>
+      <button class="button-outline" @click="escape_conver">科学计数法转换</button>
     </div>
     <br>
     <small><RouterLink to="/about">About</RouterLink></small>
