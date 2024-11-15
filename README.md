@@ -14,17 +14,3 @@ CSV Tools，一个 CSV 文件转换小工具
 - 打包命令：wails build
 
 Wails文档：https://wails.io/zh-Hans/docs/
-
-
-```自动打包推送
-# 1. 提交代码
-git add .
-git commit -m "feat: new features"
-
-# 2. 创建新版本标签
-git tag v1.0.1
-
-# 3. 推送代码和标签
-git push origin main
-git push origin v1.0.1
-```
