@@ -21,7 +21,7 @@
       <summary>软件信息</summary>
       <ol>
           <li>Development Team: WangCheng</li>
-          <li>Version: 2.0</li>
+          <li>Version: 2.0.1</li>
           <li>Github: https://github.com/TwoThreeWang/csv_tools</li>
       </ol>
   </details>
