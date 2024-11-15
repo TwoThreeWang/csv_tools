@@ -1,103 +1,65 @@
-name: Release
+name: Release on tag
+
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*' # Match any tag starting with 'v'
 
 jobs:
   build:
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest]
-        include:
-          - os: windows-latest
-            output_name: csv_tools.exe
-            asset_name: csv_tools-Windows.zip
-          - os: macos-latest
-            output_name: csv_tools.app
-            asset_name: csv_tools-Mac.zip
-            
-    runs-on: ${{ matrix.os }}
-    
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Get Version
-        id: get_version
-        run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
-        shell: bash
-      
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: '1.20'
-          
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          
-      - name: Install Wails
-        run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
-        
-      # 更新版本号在 wails.json
-      - name: Update Version in wails.json
-        run: |
-          sed -i.bak "s/\"productVersion\": \".*\"/\"productVersion\": \"${{ steps.get_version.outputs.version }}\"/" wails.json
-        shell: bash
-        
-      # 更新前端的 package.json 版本号 (如果需要)  
-      - name: Update Frontend Version
-        working-directory: frontend
-        run: |
-          npm version ${{ steps.get_version.outputs.version }} --no-git-tag-version
-        shell: bash
-        
-      # 构建前端  
-      - name: Build Frontend
-        run: |
-          cd frontend
-          npm install
-          npm run build
-          
-      # 构建应用  
-      - name: Build App
-        run: wails build
-        
-      # 打包文件
-      - name: Package Windows
-        if: matrix.os == 'windows-latest'
-        run: |
-          cd build/bin
-          7z a ../../${{ matrix.asset_name }} ${{ matrix.output_name }}
-          
-      - name: Package MacOS
-        if: matrix.os == 'macos-latest'
-        run: |
-          cd build/bin
-          zip -r ../../${{ matrix.asset_name }} ${{ matrix.output_name }}
-          
-      # 上传构建产物
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ matrix.asset_name }}
-          path: ${{ matrix.asset_name }}
-          
-  release:
-    needs: build
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            csv_tools-Windows.zip/csv_tools-Windows.zip
-            csv_tools-Mac.zip/csv_tools-Mac.zip
-          draft: false
-          prerelease: false
-          generate_release_notes: true
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '1.20'
+
+    - name: Build for Windows
+      run: wails build
+      env:
+        GOOS: windows
+        GOARCH: amd64
+
+    - name: Build for Mac
+      run: wails build
+      env:
+        GOOS: darwin
+        GOARCH: amd64
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Changes in this release:
+          - Describe your changes here
+        draft: false
+        prerelease: false
+
+    - name: Upload Windows Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./build/bin/csv_tools.exe
+        asset_name: csv_tools-windows-amd64.exe
+        asset_content_type: application/octet-stream
+
+    - name: Upload Mac Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./build/bin/csv_tools-darwin-amd64
+        asset_name: csv_tools-darwin-amd64
+        asset_content_type: application/octet-stream
