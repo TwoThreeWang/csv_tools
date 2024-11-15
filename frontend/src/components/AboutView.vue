@@ -3,33 +3,29 @@
   <div class="card">
     <router-link to="/">《 返回首页</router-link>
     <h3>CSV Tools，一个 CSV 文件转换小工具</h3>
-    <p>本工具用于将 CSV 文件转为 GBK 编码，以解决直接使用 Excel 打开 CSV 文件乱码的问题。</p>
-    <li>一键转换 CSV 编码</li>
-    <li>一键转换 CSV 编码</li>
     <details>
-        <summary>常见的水果</summary>
+        <summary>功能列表</summary>
         <ol>
-            <li>草莓</li>
-            <li>香蕉</li>
-            <li>苹果</li>
+            <li>一键转换 CSV 编码，解决 Excel 打开 CSV 乱码问题</li>
+            <li>解决数字科学计数法问题</li>
         </ol>
     </details>
-    <div class="alert" role="alert">
-        Development Team: WangCheng
-        <br>
-        Version: 2.0
-        <br>
-        Github: <a href="https://github.com/TwoThreeWang/csv_encode_conver">https://github.com/TwoThreeWang/csv_encode_conver</a>
-    </div>
+      <details>
+          <summary>更新记录</summary>
+          <ol>
+              <li>20241114 v2.0 增加科学计数法处理功能；解决文件格式错误闪退问题。</li>
+              <li>20241113 v1.0 软件诞生</li>
+          </ol>
+      </details>
+  <details>
+      <summary>软件信息</summary>
+      <ol>
+          <li>Development Team: WangCheng</li>
+          <li>Version: 2.0</li>
+          <li>Github: https://github.com/TwoThreeWang/csv_tools</li>
+      </ol>
+  </details>
   </div>
-  <br>
-  <div class="card">
-      <h3>版本更新记录</h3>
-      <div class="alert" role="alert">
-          <li>20241114 v2.0 增加科学计数法处理功能；解决文件格式错误闪退问题。</li>
-          <li>20241113 v1.0 软件诞生</li>
-      </div>
-    </div>
 </template>
 
 <script>

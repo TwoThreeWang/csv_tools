@@ -13,3 +13,9 @@ button{
 body{
     margin: 10px;
 }
+details{
+    background-color: aliceblue;
+    padding: 10px;
+    border-radius: 3px;
+    margin: 3px 0;
+}
