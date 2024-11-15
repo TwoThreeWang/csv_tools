@@ -2,8 +2,18 @@
 <template>
   <div class="card">
     <router-link to="/">《 返回首页</router-link>
-    <h3>CSV Conver Tool，一个 CSV 文件转换小工具</h3>
+    <h3>CSV Tools，一个 CSV 文件转换小工具</h3>
     <p>本工具用于将 CSV 文件转为 GBK 编码，以解决直接使用 Excel 打开 CSV 文件乱码的问题。</p>
+    <li>一键转换 CSV 编码</li>
+    <li>一键转换 CSV 编码</li>
+    <details>
+        <summary>常见的水果</summary>
+        <ol>
+            <li>草莓</li>
+            <li>香蕉</li>
+            <li>苹果</li>
+        </ol>
+    </details>
     <div class="alert" role="alert">
         Development Team: WangCheng
         <br>
