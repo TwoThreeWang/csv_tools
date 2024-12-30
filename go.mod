@@ -1,7 +1,6 @@
 module changeme
 
-go 1.20
-
+go 1.23.4
 // replace github.com/wailsapp/wails/v2 v2.6.0 => E:\Golang\pkg\mod
 
 require (
