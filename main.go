@@ -16,9 +16,9 @@ func main() {
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:  "CSV Tools v2.0.1",
-		Width:  580,
-		Height: 300,
+		Title:  "CSV Tools v3.0.0",
+		Width:  700,
+		Height: 500,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},

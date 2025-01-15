@@ -1,21 +1,118 @@
-button{
+/* 基础样式 */
+:root {
+    --primary: #000000;
+    --primary-hover: #666666;
+    --background: #ffffff;
+    --foreground: #000000;
+    --muted-foreground: #666666;
+    --border-color: #e5e7eb;
+    --upload-area-bg: #f9fafb;
+    --card-bg: #ffffff;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h1, h2 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+p {
+    color: var(--muted-foreground);
+}
+
+/* 文件上传区域 */
+.upload-area {
+    border: 2px dashed var(--border-color);
+    background-color: var(--upload-area-bg);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: border-color 0.2s;
+    text-align: center;
+}
+/* 按钮样式 */
+.btn {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--foreground);
+    background-color: var(--background);
+    border: 1px solid var(--primary);
+    border-radius: 0.3rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
     margin: 5px;
 }
-.result{
-    font-size: large;
-    font-weight: 500;
-    margin-top: 10px;
+
+.btn:hover {
+    background-color: var(--primary);
+    color: var(--background);
 }
-.input{
-    width: 90%;
-    margin: 10px auto;
+input{
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    color: hsl(var(--foreground));
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
 }
-body{
-    margin: 10px;
+input:focus{
+    border: 1px solid var(--primary);
 }
-details{
-    background-color: aliceblue;
-    padding: 10px;
-    border-radius: 3px;
-    margin: 3px 0;
+/* 关于页面 */
+.about-page {
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+}
+
+.about-page h2 {
+    margin-bottom: 1rem;
+}
+
+.about-page p {
+    margin-bottom: 1rem;
+}
+.update_info{
+    margin: 5px 0;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+/* 响应式设计 */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
 }

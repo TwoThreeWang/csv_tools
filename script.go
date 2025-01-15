@@ -2,57 +2,13 @@ package main
 
 import (
 	"bufio"
-	"encoding/csv"
 	"errors"
 	"golang.org/x/text/encoding/simplifiedchinese"
 	"golang.org/x/text/transform"
-	"io"
 	"os"
 	"regexp"
 	"strings"
 )
-
-// Conversion 编码转换函数
-func Conversion(file_path string) error {
-	if !strings.Contains(file_path, ".csv") {
-		return errors.New("Error: 仅支持 CSV 文件")
-	}
-	// 读取UTF-8编码的CSV文件
-	csvFile, err := os.Open(file_path)
-	if err != nil {
-		return errors.New("Error: 文件打开失败")
-	}
-	defer csvFile.Close()
-
-	reader := csv.NewReader(csvFile)
-	newPath := strings.Replace(file_path, ".csv", "_result.csv", -1)
-	// 创建GBK编码的输出文件
-	gbkFile, err := os.Create(newPath)
-	if err != nil {
-		return errors.New("创建新文件失败: " + err.Error())
-	}
-	defer gbkFile.Close()
-
-	writer := csv.NewWriter(transform.NewWriter(gbkFile, simplifiedchinese.GB18030.NewEncoder()))
-	defer writer.Flush()
-
-	// 逐行读取CSV文件并写入到GBK编码的输出文件
-	for {
-		record, err := reader.Read()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			return errors.New("文件格式错误: " + err.Error())
-		}
-
-		err = writer.Write(record)
-		if err != nil {
-			return errors.New("文件写入失败: " + err.Error())
-		}
-	}
-	return nil
-}
 
 // EscapeConversion 科学计数法和编码转换
 func EscapeConversion(file_path string) error {

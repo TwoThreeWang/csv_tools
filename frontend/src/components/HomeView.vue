@@ -1,25 +1,28 @@
 <template>
-  <main>
-    <div id="result" class="result">{{ data.resultText }}</div>
-    <div id="input" class="input-box">
+  <div class="container" id="home-page">
+    <h1>CSV 转换工具</h1>
+    <p>将 CSV 文件转换为 Excel 编码格式</p>
+    <!-- 文件上传区域 -->
+    <div class="upload-area" >
       <input id="name" v-model="data.file_path" autocomplete="off" class="input" type="text" placeholder="选择文件或填入文件路径"/>
-      <br>
-      <button class="button-outline" @click="select_file">选择文件</button>
-      <button class="button-outline" @click="conver">乱码转换</button>
-      <button class="button-outline" @click="escape_conver">科学计数法转换</button>
+      <p class="file-name" id="file-name" @click="select_file">{{ data.resultText }}</p>
     </div>
-    <br>
-    <small><RouterLink to="/about">About</RouterLink></small>
-  </main>
+
+    <!-- 转换按钮 -->
+    <button class="btn" @click="select_file">选择文件</button>
+    <button id="convert-btn" class="btn" @click="escape_conver">转换</button>
+    <!-- 跳转到关于页面按钮 -->
+    <RouterLink to="/about"><button id="go-about-btn" class="btn">关于</button></RouterLink>
+  </div>
 </template>
 
 <script setup>
 import {reactive} from 'vue'
-import {Conver, SelectFile, EscapeConver} from '../../wailsjs/go/main/App'
+import {SelectFile, EscapeConver} from '../../wailsjs/go/main/App'
 
 const data = reactive({
   file_path: "",
-  resultText: "先选择 CSV 文件 👇",
+  resultText: "点击选择文件 或 填写文件路径⬆️",
 })
 
 function select_file() {
@@ -32,13 +35,8 @@ function select_file() {
   })
 }
 
-function conver() {
-  Conver(data.file_path).then(result => {
-    data.resultText = result.info
-  })
-}
-
 function escape_conver() {
+  data.resultText = "文件转换中..."
   EscapeConver(data.file_path).then(result => {
     data.resultText = result.info
   })
