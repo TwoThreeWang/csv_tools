@@ -13,9 +13,8 @@
         </ul>
         <p>软件信息：</p>
         <ul>
-            <li>版本：3.0.0</li>
+            <li>Version: 3.1.0</li>
             <li>Development Team: WangCheng</li>
-            <li>Version: 3.0.0</li>
             <li>Github: https://github.com/TwoThreeWang/csv_tools</li>
         </ul>
         <div class="update_info">
@@ -33,7 +32,7 @@
 </template>
 
 <script setup>
-import {CheckUpdate} from '../../wailsjs/go/main/App'
+import { CheckUpdate } from '../../wailsjs/go/main/App';
 
 function check_update() {
     console.log("check")

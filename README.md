@@ -11,7 +11,7 @@ CSV Tools，一个 CSV 文件转换小工具
 
 使用 Walis + VUE 开发
 
-- 本地测试命令：wails dev 
+- 本地测试命令：wails dev
 - 打包命令：wails build
 
-Wails文档：https://wails.io/zh-Hans/docs/
+Wails文档：https://wails.io/zh-Hans/docs/introduction
